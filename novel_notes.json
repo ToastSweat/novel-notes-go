@@ -11,7 +11,7 @@
             {
               "id": 1,
               "name": "Test Book",
-              "current_date": "2025-11-13",
+              "current_date": "2025-11-19",
               "pages": [
                 {
                   "date": "2025-11-13",
@@ -23,6 +23,21 @@
                     },
                     {
                       "id": 2,
+                      "text": "Design checklist rollover logic",
+                      "completed": false
+                    }
+                  ]
+                },
+                {
+                  "date": "2025-11-19",
+                  "items": [
+                    {
+                      "id": 3,
+                      "text": "Write Novel Notes data model",
+                      "completed": false
+                    },
+                    {
+                      "id": 4,
                       "text": "Design checklist rollover logic",
                       "completed": false
                     }
@@ -68,8 +83,13 @@
           ]
         }
       ]
+    },
+    {
+      "id": 3,
+      "name": "New Case",
+      "shelves": []
     }
   ],
   "total_score": 1,
-  "last_rollover": ""
+  "last_rollover": "2025-11-19"
 }
