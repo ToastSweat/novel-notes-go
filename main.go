@@ -471,10 +471,17 @@ func main() {
 	if len(args) == 0 {
 		fmt.Println("Usage: go run . <command>")
 		fmt.Println("Commands:")
-		fmt.Println("  list    - Show bookcases, shelves, and books")
+		fmt.Println("  list              - Show bookcases, shelves, and books")
+		fmt.Println("  list-books        - Show all books in the library")
+		fmt.Println("  add-bookcase NAME")
+		fmt.Println("  add-shelf BOOKCASE_ID NAME")
+		fmt.Println("  add-book BOOKCASE_ID SHELF_ID NAME")
+		fmt.Println("  add-item BOOKCASE_ID SHELF_ID BOOK_ID TEXT")
+		fmt.Println("  view-book BOOKCASE_ID SHELF_ID BOOK_ID")
+		fmt.Println("  complete-item BOOKCASE_ID SHELF_ID BOOK_ID ITEM_ID")
+		fmt.Println("  view-history BOOKCASE_ID SHELF_ID BOOK_ID")
 		return
 	}
-
 	switch args[0] {
 	case "list":
 		PrintLibrarySummary(lib)
@@ -805,32 +812,6 @@ func main() {
 
 		PrintBookHistory(bk)
 		fmt.Printf("Total score: %d\n", lib.TotalScore)
-
-	case "rollover":
-		today := time.Now().Format("2006-01-02")
-
-		if lib.LastRollOver == today {
-			fmt.Println("Rollover already performed for today:", today)
-			return
-		}
-
-		if len(lib.Bookcases) == 0 {
-			fmt.Println("No bookcases found; nothing to roll over.")
-			return
-		}
-
-		// Apply rollover to every book in the library.
-		for bci := range lib.Bookcases {
-			for shi := range lib.Bookcases[bci].Shelves {
-				for bki := range lib.Bookcases[bci].Shelves[shi].Books {
-					bk := &lib.Bookcases[bci].Shelves[shi].Books[bki]
-					RolloverBook(bk, today)
-				}
-			}
-		}
-
-		lib.LastRollOver = today
-		fmt.Println("Rollover completed for", today)
 
 	default:
 		fmt.Println("Unknown command:", args[0])
